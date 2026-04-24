@@ -1,556 +1,405 @@
-/* ══════════════════════════════════════════════════════════
-   LAYO'S LUXE STUDIO — Main JavaScript
-   ══════════════════════════════════════════════════════════ */
+/**
+ * ══════════════════════════════════════════════════════════
+ * LAYO'S LUXE STUDIO — Google Apps Script Backend
+ * File: Code.gs
+ *
+ * SETUP INSTRUCTIONS:
+ * 1. Go to https://script.google.com
+ * 2. Click "New Project"
+ * 3. Rename it to "Layos Luxe Studio - Contact Form"
+ * 4. Replace all code with this file
+ * 5. Create a Google Sheet named "Layos Luxe Studio CRM"
+ * 6. Copy the Sheet ID from its URL and paste below
+ * 7. Set your notification email below
+ * 8. Deploy as Web App (see README for full steps)
+ * ══════════════════════════════════════════════════════════
+ */
 
 // ─── CONFIGURATION ────────────────────────────────────────
-// IMPORTANT: Replace this URL with your Google Apps Script Web App URL
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID_HERE/exec';
-
-// ─── PAGE NAVIGATION ──────────────────────────────────────
-let currentPage = 'home';
-
-function showPage(pageId) {
-  // Hide all pages
-  document.querySelectorAll('.page').forEach(p => {
-    p.classList.remove('active');
-  });
-
-  // Show target page
-  const targetPage = document.getElementById('page-' + pageId);
-  if (targetPage) {
-    targetPage.classList.add('active');
-    currentPage = pageId;
-  }
-
-  // Update nav links
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.classList.remove('active');
-    if (link.dataset.page === pageId) {
-      link.classList.add('active');
-    }
-  });
-
-  // Scroll to top
-  window.scrollTo({ top: 0, behavior: 'instant' });
-
-  // Close mobile menu
-  closeMenu();
-
-  // Trigger scroll animations for new page
-  setTimeout(() => {
-    triggerScrollAnimations();
-  }, 100);
-
-  // Update browser URL (optional, for UX)
-  history.pushState({ page: pageId }, '', pageId === 'home' ? '/' : '#' + pageId);
-}
-
-// ─── MOBILE MENU ──────────────────────────────────────────
-function toggleMenu() {
-  const navLinks = document.getElementById('navLinks');
-  const hamburger = document.getElementById('hamburger');
-  navLinks.classList.toggle('open');
-  hamburger.classList.toggle('open');
-}
-
-function closeMenu() {
-  const navLinks = document.getElementById('navLinks');
-  const hamburger = document.getElementById('hamburger');
-  navLinks.classList.remove('open');
-  hamburger.classList.remove('open');
-}
-
-// Close menu on outside click
-document.addEventListener('click', function(e) {
-  const navLinks = document.getElementById('navLinks');
-  const hamburger = document.getElementById('hamburger');
-  if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
-    closeMenu();
-  }
-});
-
-// ─── NAVBAR SCROLL EFFECT ─────────────────────────────────
-window.addEventListener('scroll', function() {
-  const navbar = document.getElementById('navbar');
-  if (window.scrollY > 50) {
-    navbar.classList.add('scrolled');
-  } else {
-    navbar.classList.remove('scrolled');
-  }
-});
-
-// ─── HERO PARTICLES ───────────────────────────────────────
-function createParticles() {
-  const container = document.getElementById('particles');
-  if (!container) return;
-
-  const count = 35;
-  for (let i = 0; i < count; i++) {
-    const particle = document.createElement('div');
-    particle.classList.add('particle');
-
-    const x = Math.random() * 100;
-    const y = Math.random() * 100;
-    const dur = 6 + Math.random() * 8;
-    const delay = Math.random() * 8;
-    const size = 2 + Math.random() * 4;
-
-    particle.style.cssText = `
-      left: ${x}%;
-      top: ${y}%;
-      --dur: ${dur}s;
-      --delay: ${delay}s;
-      width: ${size}px;
-      height: ${size}px;
-      background: ${Math.random() > 0.5 ? '#D4AF37' : '#F06292'};
-    `;
-
-    container.appendChild(particle);
-  }
-}
-
-// ─── SCROLL ANIMATIONS ────────────────────────────────────
-function addScrollAnimationClasses() {
-  // Add animation classes to elements
-  const selectors = [
-    '.service-card',
-    '.product-card-mini',
-    '.testimonial-card',
-    '.mv-card',
-    '.why-card',
-    '.pillar',
-    '.service-detail-card',
-    '.shop-card',
-    '.masonry-item',
-    '.step',
-    '.contact-item',
-    '.stat',
-    '.footer-col',
-  ];
-
-  selectors.forEach(selector => {
-    document.querySelectorAll(selector).forEach((el, i) => {
-      el.classList.add('scroll-reveal');
-      el.style.transitionDelay = (i * 0.08) + 's';
-    });
-  });
-
-  // Special directional reveals
-  document.querySelectorAll('.intro-image-wrap, .about-img-block').forEach(el => {
-    el.classList.add('scroll-reveal-left');
-  });
-
-  document.querySelectorAll('.contact-form-col').forEach(el => {
-    el.classList.add('scroll-reveal-right');
-  });
-}
-
-function triggerScrollAnimations() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  });
-
-  document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right').forEach(el => {
-    observer.observe(el);
-  });
-}
-
-// ─── PRODUCT CATALOG ──────────────────────────────────────
-const products = {
-  'wig-1': {
-    name: 'Luxe Lace Front Wig — Straight',
-    category: 'Wigs',
-    price: '₦45,000',
-    stars: '★★★★★',
-    imgClass: 'wig-img-1',
-    desc: 'Our signature straight lace front wig is crafted with premium human hair for the most natural look and feel. Expertly constructed for durability and comfort, this wig lies flat against the hairline for a completely undetectable finish.',
-    details: [
-      '✦ 100% Premium Human Hair',
-      '✦ Available in 14", 16", 18", 20" lengths',
-      '✦ Pre-plucked natural hairline',
-      '✦ Available in Jet Black, Dark Brown, Medium Brown',
-      '✦ Includes wig cap and care instructions'
-    ]
-  },
-  'wig-2': {
-    name: 'Curly Bob Wig — Honey Blonde',
-    category: 'Wigs',
-    price: '₦38,000',
-    stars: '★★★★★',
-    imgClass: 'wig-img-2',
-    desc: 'Turn heads with this stunning honey blonde curly bob. Made from high-grade synthetic fiber that mimics the look and bounce of real curls. Perfect for everyday wear or special occasions.',
-    details: [
-      '✦ Premium Heat-Resistant Fiber',
-      '✦ 10–12 inch length',
-      '✦ Natural curl pattern',
-      '✦ Honey Blonde with highlights',
-      '✦ Lightweight, breathable cap'
-    ]
-  },
-  'wig-3': {
-    name: 'Deep Wave Full Lace Wig',
-    category: 'Wigs',
-    price: '₦52,000',
-    stars: '★★★★☆',
-    imgClass: 'wig-img-3',
-    desc: 'Experience the ultimate in luxury with our deep wave full lace wig. Featuring 360° hand-tied lace construction, this wig allows you to style your hair in any direction for maximum versatility.',
-    details: [
-      '✦ 100% Virgin Human Hair',
-      '✦ 360° Full Lace Construction',
-      '✦ Available in 16", 18", 20", 22" lengths',
-      '✦ Natural Black & Dark Brown',
-      '✦ Professional installation recommended'
-    ]
-  },
-  'dress-1': {
-    name: 'Elegant Bodycon Dress — Rose',
-    category: 'Ladies Wear',
-    price: '₦28,000',
-    stars: '★★★★★',
-    imgClass: 'dress-img-1',
-    desc: 'This figure-flattering bodycon dress is crafted from premium stretch fabric that hugs your curves in all the right places. The deep rose color adds a bold, feminine edge that commands attention.',
-    details: [
-      '✦ Premium Stretch Fabric Blend',
-      '✦ Available in sizes S, M, L, XL, XXL',
-      '✦ Deep Rose / Blush / Black colorways',
-      '✦ Knee-length cut',
-      '✦ Machine washable'
-    ]
-  },
-  'dress-2': {
-    name: 'Floral Midi Dress — Luxe Edition',
-    category: 'Ladies Wear',
-    price: '₦22,000',
-    stars: '★★★★★',
-    imgClass: 'dress-img-2',
-    desc: 'Effortlessly elegant, this floral midi dress features a wrap-style bodice and flowing skirt that creates a beautifully feminine silhouette. Perfect for brunches, events, and garden parties.',
-    details: [
-      '✦ 100% Soft Chiffon',
-      '✦ Sizes XS – XXL',
-      '✦ Pink Floral on White / Purple Floral on Black',
-      '✦ Midi length (below knee)',
-      '✦ V-neckline, adjustable wrap tie'
-    ]
-  },
-  'dress-3': {
-    name: 'Off-Shoulder Evening Gown',
-    category: 'Ladies Wear',
-    price: '₦35,000',
-    stars: '★★★★★',
-    imgClass: 'dress-img-3',
-    desc: 'Make an unforgettable entrance in our off-shoulder evening gown. With its corseted bodice, sweeping skirt, and luxurious fabric, this dress is designed for women who demand nothing but the best.',
-    details: [
-      '✦ Premium Satin/Lace Mix',
-      '✦ Sizes XS – 2XL',
-      '✦ Rose Pink / Deep Crimson / Midnight Black',
-      '✦ Floor-length with slight train',
-      '✦ Built-in boning & bra cups'
-    ]
-  },
-  'acc-1': {
-    name: 'Gold Statement Earrings',
-    category: 'Accessories',
-    price: '₦8,500',
-    stars: '★★★★★',
-    imgClass: 'acc-img-1',
-    desc: 'These stunning statement earrings feature a cascading gold design with delicate crystal accents. The perfect finishing touch for any look, from casual chic to full evening glamour.',
-    details: [
-      '✦ 18k Gold-Plated Base Metal',
-      '✦ Hypoallergenic posts',
-      '✦ 7cm drop length',
-      '✦ Crystal/CZ accents',
-      '✦ Presented in a luxury gift box'
-    ]
-  },
-  'acc-2': {
-    name: 'Pearl & Gold Necklace Set',
-    category: 'Accessories',
-    price: '₦12,000',
-    stars: '★★★★★',
-    imgClass: 'acc-img-2',
-    desc: 'Timeless elegance in a set. This pearl and gold necklace set includes a 16" strand, matching bracelet, and stud earrings — all presented in a luxury velvet pouch. A complete gift of sophistication.',
-    details: [
-      '✦ Faux Pearl & 18k Gold-Plated',
-      '✦ Necklace: 16" + 2" extension',
-      '✦ Set includes necklace, bracelet, earrings',
-      '✦ White Pearl / Rose Pearl / Champagne Pearl',
-      '✦ Luxury velvet gift pouch included'
-    ]
-  },
-  'acc-3': {
-    name: 'Luxury Tote Bag — Blush',
-    category: 'Accessories',
-    price: '₦18,500',
-    stars: '★★★★☆',
-    imgClass: 'acc-img-3',
-    desc: 'Designed for the woman who carries her world in style. This structured tote features a premium vegan leather exterior, gold hardware, and a spacious interior with multiple organizational pockets.',
-    details: [
-      '✦ Premium Vegan Leather',
-      '✦ Gold-tone Hardware',
-      '✦ 38cm × 30cm × 14cm',
-      '✦ Interior: 3 pockets, 1 zip pocket',
-      '✦ Blush / Black / Caramel'
-    ]
-  }
+var CONFIG = {
+  SPREADSHEET_ID:     'YOUR_GOOGLE_SHEET_ID_HERE',   // ← Replace this
+  SHEET_NAME:         'Enquiries',
+  NOTIFICATION_EMAIL: 'oladembak@gmail.com',   // ← Replace with your email
+  BRAND_NAME:         "Layo's Luxe Studio",
+  AUTO_REPLY:         true  // Set to false to disable auto-reply emails to clients
 };
 
-function openProduct(productId) {
-  const product = products[productId];
-  if (!product) return;
+// ─── HEADERS for Google Sheets ────────────────────────────
+var HEADERS = [
+  '📅 Timestamp',
+  '👤 First Name',
+  '👤 Last Name',
+  '📧 Email',
+  '📞 Phone',
+  '💅 Service Interested In',
+  '💬 Message',
+  '🌐 Source',
+  '🔖 Status'
+];
 
-  const modal = document.getElementById('modalOverlay');
-  const inner = document.getElementById('modalInner');
-
-  inner.innerHTML = `
-    <div class="modal-img ${product.imgClass}"></div>
-    <div class="modal-info">
-      <span class="modal-cat">${product.category}</span>
-      <h2 class="modal-title">${product.name}</h2>
-      <div class="modal-stars">${product.stars}</div>
-      <div class="modal-price">${product.price}</div>
-      <p class="modal-desc">${product.desc}</p>
-      <ul class="modal-details">
-        ${product.details.map(d => `<li>${d}</li>`).join('')}
-      </ul>
-      <div class="modal-actions">
-        <button class="btn btn-primary" onclick="orderProduct('${product.name}')">Order Now</button>
-        <button class="btn btn-outline" onclick="showPage('contact')">Ask a Question</button>
-      </div>
-    </div>
-  `;
-
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-  const modal = document.getElementById('modalOverlay');
-  modal.classList.remove('active');
-  document.body.style.overflow = '';
-}
-
-function orderProduct(productName) {
-  closeModal();
-  showPage('contact');
-  // Pre-fill service dropdown if it matches
-  setTimeout(() => {
-    const serviceSelect = document.getElementById('service');
-    if (serviceSelect) {
-      serviceSelect.value = 'Ladies Wear / Shopping';
-    }
-    const messageField = document.getElementById('message');
-    if (messageField) {
-      messageField.value = `I'm interested in ordering: ${productName}\n\nPlease let me know availability and delivery options.`;
-    }
-  }, 600);
-}
-
-// ─── PRODUCT FILTERING (SHOP) ─────────────────────────────
-function filterProducts(category, btn) {
-  // Update active button
-  document.querySelectorAll('.shop-filters .filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-
-  // Filter cards
-  document.querySelectorAll('#shopGrid .shop-card').forEach(card => {
-    if (category === 'all' || card.dataset.cat === category) {
-      card.classList.remove('hidden');
-      card.style.animation = 'pageFadeIn 0.4s ease forwards';
-    } else {
-      card.classList.add('hidden');
-    }
-  });
-}
-
-// ─── GALLERY FILTERING ────────────────────────────────────
-function filterGallery(category, btn) {
-  document.querySelectorAll('.gallery-filters .filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-
-  document.querySelectorAll('#galleryGrid .masonry-item').forEach(item => {
-    if (category === 'all' || item.dataset.cat === category) {
-      item.classList.remove('hidden');
-    } else {
-      item.classList.add('hidden');
-    }
-  });
-}
-
-// ─── CONTACT FORM ─────────────────────────────────────────
-async function submitForm(e) {
-  e.preventDefault();
-
-  const submitBtn = document.getElementById('submitBtn');
-  const btnText = submitBtn.querySelector('.btn-text');
-  const btnLoader = submitBtn.querySelector('.btn-loader');
-
-  // Show loading state
-  btnText.classList.add('hidden');
-  btnLoader.classList.remove('hidden');
-  submitBtn.disabled = true;
-
-  // Gather form data
-  const formData = {
-    firstName: document.getElementById('firstName').value,
-    lastName: document.getElementById('lastName').value,
-    email: document.getElementById('email').value,
-    phone: document.getElementById('phone').value,
-    service: document.getElementById('service').value,
-    message: document.getElementById('message').value,
-    timestamp: new Date().toLocaleString(),
-    source: 'Layo\'s Luxe Studio Website'
-  };
-
+// ─── HANDLE POST REQUEST (Form Submissions) ───────────────
+function doPost(e) {
   try {
-    // Submit to Google Apps Script
-    const response = await fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors', // Required for Google Apps Script
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
-    });
+    var data = JSON.parse(e.postData.contents);
 
-    // Show success (no-cors means we can't read the response, but if no error was thrown, it likely succeeded)
-    showFormSuccess();
+    saveToSheet(data);
+    sendNotificationEmail(data);
 
-  } catch (error) {
-    // For demo purposes, show success anyway
-    // In production, handle error states properly
-    console.error('Form submission error:', error);
-    showFormSuccess(); // Remove this line in production and show error instead
-  }
-}
-
-function showFormSuccess() {
-  const form = document.getElementById('contactForm');
-  const success = document.getElementById('formSuccess');
-
-  form.classList.add('hidden');
-  success.classList.remove('hidden');
-
-  // Scroll to success message
-  success.scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
-
-// ─── KEYBOARD NAVIGATION ──────────────────────────────────
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    closeModal();
-    closeMenu();
-  }
-});
-
-// ─── BACK/FORWARD NAVIGATION ──────────────────────────────
-window.addEventListener('popstate', function(e) {
-  if (e.state && e.state.page) {
-    showPage(e.state.page);
-  }
-});
-
-// ─── SMOOTH LINK INTERCEPTION ─────────────────────────────
-document.addEventListener('click', function(e) {
-  // Prevent default on anchor tags that navigate pages
-  if (e.target.tagName === 'A' && e.target.href === '#') {
-    e.preventDefault();
-  }
-});
-
-// ─── INITIALIZE ───────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', function() {
-  // Create hero particles
-  createParticles();
-
-  // Add scroll animation classes
-  addScrollAnimationClasses();
-
-  // Trigger initial animations
-  setTimeout(() => {
-    triggerScrollAnimations();
-  }, 300);
-
-  // Trigger scroll on scroll event
-  window.addEventListener('scroll', triggerScrollAnimations, { passive: true });
-
-  // Initialize page state
-  history.replaceState({ page: 'home' }, '', '/');
-
-  console.log('%c♛ Layo\'s Luxe Studio', 'color: #C2185B; font-size: 20px; font-weight: bold; font-family: Georgia, serif;');
-  console.log('%cBeauty. Style. Confidence.', 'color: #D4AF37; font-size: 14px; font-style: italic;');
-});
-
-// ─── GOOGLE APPS SCRIPT (Backend Code) ────────────────────
-/*
-  ════════════════════════════════════════════════════════════
-  GOOGLE APPS SCRIPT CODE
-  Copy this into your Google Apps Script editor at:
-  https://script.google.com
-  
-  Then deploy as a Web App and paste the URL into
-  APPS_SCRIPT_URL at the top of this file.
-  ════════════════════════════════════════════════════════════
-
-  function doPost(e) {
-    try {
-      var data = JSON.parse(e.postData.contents);
-      
-      var ss = SpreadsheetApp.openById('YOUR_SPREADSHEET_ID');
-      var sheet = ss.getSheetByName('Enquiries') || ss.insertSheet('Enquiries');
-      
-      // Add headers if first time
-      if (sheet.getLastRow() === 0) {
-        sheet.appendRow([
-          'Timestamp', 'First Name', 'Last Name', 'Email',
-          'Phone', 'Service', 'Message', 'Source'
-        ]);
-        sheet.getRange(1, 1, 1, 8).setFontWeight('bold');
-      }
-      
-      // Add the new entry
-      sheet.appendRow([
-        data.timestamp,
-        data.firstName,
-        data.lastName,
-        data.email,
-        data.phone,
-        data.service,
-        data.message,
-        data.source
-      ]);
-      
-      // Optional: Send notification email
-      MailApp.sendEmail({
-        to: 'your@email.com',
-        subject: 'New Enquiry - Layo\'s Luxe Studio',
-        body: 'New enquiry received:\n\n' +
-              'Name: ' + data.firstName + ' ' + data.lastName + '\n' +
-              'Email: ' + data.email + '\n' +
-              'Phone: ' + data.phone + '\n' +
-              'Service: ' + data.service + '\n' +
-              'Message: ' + data.message + '\n' +
-              'Time: ' + data.timestamp
-      });
-      
-      return ContentService
-        .createTextOutput(JSON.stringify({ status: 'success' }))
-        .setMimeType(ContentService.MimeType.JSON);
-        
-    } catch(err) {
-      return ContentService
-        .createTextOutput(JSON.stringify({ status: 'error', message: err.toString() }))
-        .setMimeType(ContentService.MimeType.JSON);
+    if (CONFIG.AUTO_REPLY && data.email) {
+      sendAutoReplyEmail(data);
     }
-  }
 
-  function doGet(e) {
     return ContentService
-      .createTextOutput(JSON.stringify({ status: 'active', message: 'Layo\'s Luxe Studio API is live' }))
+      .createTextOutput(JSON.stringify({
+        status:  'success',
+        message: 'Enquiry received successfully'
+      }))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch (err) {
+    Logger.log('Error in doPost: ' + err.toString());
+    return ContentService
+      .createTextOutput(JSON.stringify({
+        status:  'error',
+        message: err.toString()
+      }))
       .setMimeType(ContentService.MimeType.JSON);
   }
-*/
+}
+
+// ─── HANDLE GET REQUEST (Health Check) ───────────────────
+function doGet(e) {
+  return ContentService
+    .createTextOutput(JSON.stringify({
+      status:    'active',
+      message:   CONFIG.BRAND_NAME + ' Contact Form API is live',
+      timestamp: new Date().toLocaleString()
+    }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+// ─── SAVE DATA TO GOOGLE SHEETS ───────────────────────────
+function saveToSheet(data) {
+  var ss    = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  var sheet = ss.getSheetByName(CONFIG.SHEET_NAME);
+
+  if (!sheet) {
+    sheet = ss.insertSheet(CONFIG.SHEET_NAME);
+    setupSheetHeaders(sheet);
+  }
+
+  if (sheet.getLastRow() === 0) {
+    setupSheetHeaders(sheet);
+  }
+
+  sheet.appendRow([
+    data.timestamp || new Date().toLocaleString(),
+    data.firstName  || '',
+    data.lastName   || '',
+    data.email      || '',
+    data.phone      || '',
+    data.service    || 'Not specified',
+    data.message    || '',
+    data.source     || 'Website',
+    'New'
+  ]);
+
+  var lastRow = sheet.getLastRow();
+  sheet.getRange(lastRow, 1, 1, HEADERS.length).setBackground('#FFF8F5');
+
+  Logger.log('Data saved to sheet. Row: ' + lastRow);
+}
+
+// ─── SETUP SHEET HEADERS & FORMATTING ────────────────────
+function setupSheetHeaders(sheet) {
+  sheet.appendRow(HEADERS);
+
+  var headerRange = sheet.getRange(1, 1, 1, HEADERS.length);
+  headerRange.setBackground('#C2185B');
+  headerRange.setFontColor('#FFFFFF');
+  headerRange.setFontWeight('bold');
+  headerRange.setFontSize(11);
+
+  sheet.setColumnWidth(1, 180);
+  sheet.setColumnWidth(2, 130);
+  sheet.setColumnWidth(3, 130);
+  sheet.setColumnWidth(4, 220);
+  sheet.setColumnWidth(5, 160);
+  sheet.setColumnWidth(6, 200);
+  sheet.setColumnWidth(7, 350);
+  sheet.setColumnWidth(8, 180);
+  sheet.setColumnWidth(9, 100);
+
+  sheet.setFrozenRows(1);
+  Logger.log('Sheet headers set up.');
+}
+
+// ─── SEND NOTIFICATION EMAIL TO STUDIO OWNER ─────────────
+function sendNotificationEmail(data) {
+  var subject = '✨ New Enquiry — ' + CONFIG.BRAND_NAME + ' | ' +
+                (data.service || 'General') + ' | ' +
+                (data.firstName || '') + ' ' + (data.lastName || '');
+
+  var htmlBody =
+    '<div style="margin:0;padding:0;background-color:#f4eae1;font-family:Georgia,serif;">' +
+    '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f4eae1;">' +
+    '<tr><td align="center" style="padding:30px 15px;">' +
+
+    '<!-- CARD -->' +
+    '<table width="620" cellpadding="0" cellspacing="0" border="0" style="max-width:620px;background-color:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 4px 30px rgba(194,24,91,0.12);">' +
+
+    '<!-- HEADER -->' +
+    '<tr><td style="background:linear-gradient(135deg,#C2185B,#D6336C);padding:32px 30px;text-align:center;">' +
+    '<p style="margin:0 0 6px;color:#D4AF37;font-family:Georgia,serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;">New Enquiry Received</p>' +
+    '<h1 style="margin:0;color:#ffffff;font-family:Georgia,serif;font-size:26px;font-weight:bold;">&#9819; Layo\'s Luxe Studio</h1>' +
+    '<p style="margin:6px 0 0;color:rgba(255,255,255,0.8);font-family:Georgia,serif;font-size:13px;font-style:italic;">Beauty. Style. Confidence.</p>' +
+    '</td></tr>' +
+
+    '<!-- ALERT BANNER -->' +
+    '<tr><td style="background-color:#FFF8E1;border-left:4px solid #D4AF37;padding:14px 24px;">' +
+    '<p style="margin:0;font-family:Arial,sans-serif;font-size:13px;color:#5D4037;">' +
+    '<strong>&#128276; Action Required:</strong> A new client enquiry has been submitted from your website.' +
+    '</p>' +
+    '</td></tr>' +
+
+    '<!-- CLIENT DETAILS -->' +
+    '<tr><td style="padding:30px;">' +
+    '<h2 style="margin:0 0 18px;font-family:Georgia,serif;font-size:18px;color:#C2185B;border-bottom:2px solid #F4EAE1;padding-bottom:10px;">Client Details</h2>' +
+
+    '<table width="100%" cellpadding="0" cellspacing="0" border="0">' +
+
+    '<tr>' +
+    '<td width="35%" style="padding:10px 0;border-bottom:1px solid #F4EAE1;font-family:Arial,sans-serif;font-size:12px;font-weight:bold;text-transform:uppercase;letter-spacing:1px;color:#8a6a7a;">Full Name</td>' +
+    '<td style="padding:10px 0;border-bottom:1px solid #F4EAE1;font-family:Arial,sans-serif;font-size:14px;color:#2d1525;"><strong>' + (data.firstName || '') + ' ' + (data.lastName || '') + '</strong></td>' +
+    '</tr>' +
+
+    '<tr>' +
+    '<td width="35%" style="padding:10px 0;border-bottom:1px solid #F4EAE1;font-family:Arial,sans-serif;font-size:12px;font-weight:bold;text-transform:uppercase;letter-spacing:1px;color:#8a6a7a;">Email</td>' +
+    '<td style="padding:10px 0;border-bottom:1px solid #F4EAE1;font-family:Arial,sans-serif;font-size:14px;"><a href="mailto:' + (data.email || '') + '" style="color:#C2185B;text-decoration:none;">' + (data.email || '') + '</a></td>' +
+    '</tr>' +
+
+    '<tr>' +
+    '<td width="35%" style="padding:10px 0;border-bottom:1px solid #F4EAE1;font-family:Arial,sans-serif;font-size:12px;font-weight:bold;text-transform:uppercase;letter-spacing:1px;color:#8a6a7a;">Phone</td>' +
+    '<td style="padding:10px 0;border-bottom:1px solid #F4EAE1;font-family:Arial,sans-serif;font-size:14px;"><a href="tel:' + (data.phone || '') + '" style="color:#C2185B;text-decoration:none;">' + (data.phone || 'Not provided') + '</a></td>' +
+    '</tr>' +
+
+    '<tr>' +
+    '<td width="35%" style="padding:10px 0;border-bottom:1px solid #F4EAE1;font-family:Arial,sans-serif;font-size:12px;font-weight:bold;text-transform:uppercase;letter-spacing:1px;color:#8a6a7a;">Service</td>' +
+    '<td style="padding:10px 0;border-bottom:1px solid #F4EAE1;">' +
+    '<span style="display:inline-block;background:#C2185B;color:#ffffff;padding:4px 14px;border-radius:30px;font-family:Arial,sans-serif;font-size:12px;font-weight:bold;">' + (data.service || 'General Enquiry') + '</span>' +
+    '</td>' +
+    '</tr>' +
+
+    '<tr>' +
+    '<td width="35%" style="padding:10px 0;font-family:Arial,sans-serif;font-size:12px;font-weight:bold;text-transform:uppercase;letter-spacing:1px;color:#8a6a7a;">Submitted</td>' +
+    '<td style="padding:10px 0;font-family:Arial,sans-serif;font-size:14px;color:#2d1525;">' + (data.timestamp || '') + '</td>' +
+    '</tr>' +
+
+    '</table>' +
+
+    '<!-- MESSAGE -->' +
+    '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:24px;">' +
+    '<tr><td>' +
+    '<p style="margin:0 0 10px;font-family:Arial,sans-serif;font-size:12px;font-weight:bold;text-transform:uppercase;letter-spacing:1px;color:#C2185B;">Message</p>' +
+    '<table width="100%" cellpadding="20" cellspacing="0" border="0" style="background-color:#FFF8F5;border:1px solid #F4EAE1;border-radius:10px;">' +
+    '<tr><td><p style="margin:0;font-family:Georgia,serif;font-size:14px;color:#5a3a4a;line-height:1.8;font-style:italic;">&ldquo;' + (data.message || '') + '&rdquo;</p></td></tr>' +
+    '</table>' +
+    '</td></tr>' +
+    '</table>' +
+
+    '<!-- CTA BUTTON -->' +
+    '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:30px;">' +
+    '<tr><td align="center">' +
+    '<a href="mailto:' + (data.email || '') + '?subject=Re:%20Your%20Enquiry%20%E2%80%94%20Layo\'s%20Luxe%20Studio" ' +
+    'style="display:inline-block;background:#C2185B;color:#ffffff;padding:14px 32px;border-radius:30px;font-family:Arial,sans-serif;font-size:13px;font-weight:bold;letter-spacing:1px;text-decoration:none;">Reply to Client &rarr;</a>' +
+    '</td></tr>' +
+    '</table>' +
+
+    '</td></tr>' + // end padding cell
+
+    '<!-- FOOTER -->' +
+    '<tr><td style="background-color:#111111;padding:22px 30px;text-align:center;">' +
+    '<p style="margin:0;font-family:Georgia,serif;font-size:13px;color:rgba(255,255,255,0.5);">&#9819; Layo\'s Luxe Studio &nbsp;|&nbsp; <em style="color:#D4AF37;">Beauty. Style. Confidence.</em></p>' +
+    '<p style="margin:6px 0 0;font-family:Arial,sans-serif;font-size:11px;color:rgba(255,255,255,0.3);">This is an automated notification from your website contact form.</p>' +
+    '</td></tr>' +
+
+    '</table>' + // end card
+    '</td></tr>' +
+    '</table>' + // end outer
+    '</div>';
+
+  MailApp.sendEmail({
+    to:       CONFIG.NOTIFICATION_EMAIL,
+    subject:  subject,
+    htmlBody: htmlBody
+  });
+
+  Logger.log('Notification email sent to: ' + CONFIG.NOTIFICATION_EMAIL);
+}
+
+// ─── SEND AUTO-REPLY TO CLIENT ─────────────────────────────
+function sendAutoReplyEmail(data) {
+  var subject = "We received your enquiry — Layo's Luxe Studio &#9819;";
+
+  var steps = [
+    { num: '1', text: 'We review your enquiry carefully' },
+    { num: '2', text: 'Our team contacts you to confirm details' },
+    { num: '3', text: 'We book your appointment or process your order' },
+    { num: '4', text: 'You experience the Layo\'s Luxe difference &#10024;' }
+  ];
+
+  var stepsHtml = '';
+  for (var i = 0; i < steps.length; i++) {
+    stepsHtml +=
+      '<tr>' +
+      '<td width="36" valign="top" style="padding:0 12px 12px 0;">' +
+      '<table width="36" height="36" cellpadding="0" cellspacing="0" border="0">' +
+      '<tr><td align="center" valign="middle" style="width:36px;height:36px;background-color:#C2185B;border-radius:50%;font-family:Arial,sans-serif;font-size:13px;font-weight:bold;color:#ffffff;">' + steps[i].num + '</td></tr>' +
+      '</table>' +
+      '</td>' +
+      '<td valign="middle" style="padding:0 0 12px 0;font-family:Arial,sans-serif;font-size:13px;color:#5a3a4a;line-height:1.6;">' + steps[i].text + '</td>' +
+      '</tr>';
+  }
+
+  var htmlBody =
+    '<div style="margin:0;padding:0;background-color:#f4eae1;font-family:Georgia,serif;">' +
+    '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f4eae1;">' +
+    '<tr><td align="center" style="padding:30px 15px;">' +
+
+    '<!-- CARD -->' +
+    '<table width="620" cellpadding="0" cellspacing="0" border="0" style="max-width:620px;background-color:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 4px 30px rgba(194,24,91,0.12);">' +
+
+    '<!-- HEADER -->' +
+    '<tr><td style="background:linear-gradient(135deg,#C2185B,#D6336C);padding:40px 30px;text-align:center;">' +
+    '<p style="margin:0 0 10px;color:#D4AF37;font-family:Arial,sans-serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;">Thank You For Reaching Out</p>' +
+    '<h1 style="margin:0;color:#ffffff;font-family:Georgia,serif;font-size:28px;font-weight:bold;">&#9819; Layo\'s Luxe Studio</h1>' +
+    '<p style="margin:8px 0 0;color:rgba(255,255,255,0.75);font-family:Georgia,serif;font-size:14px;font-style:italic;">Beauty. Style. Confidence.</p>' +
+    '</td></tr>' +
+
+    '<!-- BODY -->' +
+    '<tr><td style="padding:36px 35px 20px;">' +
+
+    '<p style="margin:0 0 6px;font-family:Georgia,serif;font-size:16px;color:#2d1525;">Hello, <strong>' + (data.firstName || 'there') + '</strong>! &#128081;</p>' +
+    '<p style="margin:0 0 20px;font-family:Arial,sans-serif;font-size:15px;color:#5a3a4a;line-height:1.8;">Thank you for contacting <strong>Layo\'s Luxe Studio</strong>! We\'ve received your enquiry and we\'re absolutely delighted to hear from you.</p>' +
+
+    '<!-- ENQUIRY SUMMARY BOX -->' +
+    '<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#FFF8F5;border-left:4px solid #C2185B;border-radius:0 10px 10px 0;margin-bottom:24px;">' +
+    '<tr><td style="padding:18px 20px;">' +
+    '<p style="margin:0;font-family:Arial,sans-serif;font-size:13px;color:#5a3a4a;line-height:1.8;">' +
+    '<strong style="color:#C2185B;">Your enquiry summary:</strong><br/>' +
+    'Service: <strong>' + (data.service || 'General Enquiry') + '</strong><br/>' +
+    'Received: ' + (data.timestamp || new Date().toLocaleString()) +
+    '</p>' +
+    '</td></tr>' +
+    '</table>' +
+
+    '<p style="margin:0 0 24px;font-family:Arial,sans-serif;font-size:14px;color:#5a3a4a;line-height:1.8;">' +
+    'Our team will review your message and get back to you within <strong>24 hours</strong>. ' +
+    'If you need to speak with us urgently, feel free to reach us directly via WhatsApp or phone.' +
+    '</p>' +
+
+    '</td></tr>' +
+
+    '<!-- WHAT HAPPENS NEXT -->' +
+    '<tr><td style="padding:0 35px 28px;">' +
+    '<p style="margin:0 0 16px;font-family:Arial,sans-serif;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:#C2185B;">What Happens Next</p>' +
+    '<table width="100%" cellpadding="0" cellspacing="0" border="0">' +
+    '<tbody>' + stepsHtml + '</tbody>' +
+    '</table>' +
+    '</td></tr>' +
+
+    '<!-- SERVICES STRIP -->' +
+    '<tr><td style="padding:0 35px 30px;">' +
+    '<table width="100%" cellpadding="22" cellspacing="0" border="0" style="background-color:#111111;border-radius:12px;">' +
+    '<tr><td style="text-align:center;">' +
+    '<p style="margin:0 0 10px;font-family:Arial,sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.5);">Our Services</p>' +
+    '<p style="margin:0;font-family:Arial,sans-serif;font-size:12px;letter-spacing:2px;color:#D4AF37;">HAIRSTYLING &nbsp;&middot;&nbsp; MAKEUP &nbsp;&middot;&nbsp; WIGS &nbsp;&middot;&nbsp; LADIES WEAR &nbsp;&middot;&nbsp; STYLING &nbsp;&middot;&nbsp; ACCESSORIES</p>' +
+    '</td></tr>' +
+    '</table>' +
+    '</td></tr>' +
+
+    '<!-- CONTACT INFO -->' +
+    '<tr><td style="padding:0 35px 28px;text-align:center;">' +
+    '<p style="margin:0;font-family:Arial,sans-serif;font-size:13px;color:#8a6a7a;line-height:1.8;">' +
+    '&#128222; +234 800 000 0000 &nbsp;|&nbsp; &#128231; hello@layosluxestudio.com<br/>' +
+    '&#128205; Lagos, Nigeria &nbsp;|&nbsp; &#128336; Mon&ndash;Sat: 9am &ndash; 7pm' +
+    '</p>' +
+    '</td></tr>' +
+
+    '<!-- BRAND QUOTE -->' +
+    '<tr><td style="padding:0 35px 36px;text-align:center;">' +
+    '<p style="margin:0;font-family:Georgia,serif;font-size:17px;font-style:italic;color:#C2185B;">' +
+    '&ldquo;We don&rsquo;t just beautify &mdash; we transform you to look and feel your best.&rdquo;' +
+    '</p>' +
+    '</td></tr>' +
+
+    '<!-- FOOTER -->' +
+    '<tr><td style="background-color:#111111;padding:26px 30px;text-align:center;">' +
+    '<p style="margin:0 0 4px;font-family:Georgia,serif;font-size:16px;color:#ffffff;">&#9819; Layo\'s Luxe Studio</p>' +
+    '<p style="margin:0 0 14px;font-family:Georgia,serif;font-size:12px;font-style:italic;color:#D4AF37;">Beauty. Style. Confidence.</p>' +
+    '<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center">' +
+    '<a href="#" style="font-family:Arial,sans-serif;font-size:11px;color:rgba(255,255,255,0.5);text-decoration:none;">Instagram</a>' +
+    '<span style="font-family:Arial,sans-serif;font-size:11px;color:rgba(255,255,255,0.2);"> &nbsp;|&nbsp; </span>' +
+    '<a href="#" style="font-family:Arial,sans-serif;font-size:11px;color:rgba(255,255,255,0.5);text-decoration:none;">WhatsApp</a>' +
+    '<span style="font-family:Arial,sans-serif;font-size:11px;color:rgba(255,255,255,0.2);"> &nbsp;|&nbsp; </span>' +
+    '<a href="#" style="font-family:Arial,sans-serif;font-size:11px;color:rgba(255,255,255,0.5);text-decoration:none;">TikTok</a>' +
+    '</td></tr></table>' +
+    '<p style="margin:14px 0 0;font-family:Arial,sans-serif;font-size:11px;color:rgba(255,255,255,0.25);">You are receiving this email because you submitted an enquiry on Layo\'s Luxe Studio website.</p>' +
+    '</td></tr>' +
+
+    '</table>' + // end card
+    '</td></tr>' +
+    '</table>' + // end outer
+    '</div>';
+
+  MailApp.sendEmail({
+    to:       data.email,
+    subject:  subject,
+    name:     "Layo's Luxe Studio",
+    htmlBody: htmlBody
+  });
+
+  Logger.log('Auto-reply sent to: ' + data.email);
+}
+
+// ─── UTILITY: INITIALIZE SHEET ────────────────────────────
+// Run this function manually once to set up the sheet
+function initializeSheet() {
+  var ss    = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  var sheet = ss.getSheetByName(CONFIG.SHEET_NAME);
+
+  if (!sheet) {
+    sheet = ss.insertSheet(CONFIG.SHEET_NAME);
+  }
+
+  sheet.clearContents();
+  setupSheetHeaders(sheet);
+
+  Logger.log('Sheet initialized successfully.');
+  SpreadsheetApp.getUi().alert('✅ Sheet initialized successfully!');
+}
+
+// ─── UTILITY: TEST FORM SUBMISSION ────────────────────────
+// Run this function to test the entire flow
+function testSubmission() {
+  var testData = {
+    timestamp: new Date().toLocaleString(),
+    firstName: 'Test',
+    lastName:  'Client',
+    email:     CONFIG.NOTIFICATION_EMAIL,
+    phone:     '+234 9017715047',
+    service:   'Wig Making & Installation',
+    message:   'This is a test submission from the Google Apps Script test function. If you receive this, the setup is working correctly!',
+    source:    "Layo's Luxe Studio Website "
+  };
+
+  saveToSheet(testData);
+  sendNotificationEmail(testData);
+
+  if (CONFIG.AUTO_REPLY) {
+    sendAutoReplyEmail(testData);
+  }
+
+  Logger.log('Test submission completed.');
+  SpreadsheetApp.getUi().alert('✅ Test completed! Check your email and the Enquiries sheet.');
+}
