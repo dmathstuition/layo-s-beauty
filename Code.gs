@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Layo's Luxe Studio — Beauty. Style. Confidence.</title>
+  <meta name="description" content="Premium beauty and fashion studio offering hairstyling, makeup, wigs, ladies wear, and fashion styling." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- NAVIGATION -->
+  <!-- ══════════════════════════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="nav-logo" onclick="showPage('home')">
+        <div class="logo-crown">♛</div>
+        <div class="logo-text">
+          <span class="logo-layo">Layo's</span>
+          <span class="logo-luxe">LUXE STUDIO</span>
+        </div>
+      </div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#" class="nav-link active" data-page="home" onclick="showPage('home')">Home</a></li>
+        <li><a href="#" class="nav-link" data-page="about" onclick="showPage('about')">About</a></li>
+        <li><a href="#" class="nav-link" data-page="services" onclick="showPage('services')">Services</a></li>
+        <li><a href="#" class="nav-link" data-page="shop" onclick="showPage('shop')">Shop</a></li>
+        <li><a href="#" class="nav-link" data-page="gallery" onclick="showPage('gallery')">Gallery</a></li>
+        <li><a href="#" class="nav-link nav-cta" data-page="contact" onclick="showPage('contact')">Book Now</a></li>
+      </ul>
+
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- PAGE: HOME -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="page active" id="page-home">
+
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-bg">
+        <div class="hero-overlay"></div>
+        <div class="hero-particles" id="particles"></div>
+      </div>
+      <div class="hero-content">
+        <p class="hero-eyebrow reveal">Premium Beauty & Fashion Studio</p>
+        <h1 class="hero-title reveal">
+          <em>Elevate</em> Your<br/>Look. Define<br/>Your <span class="gold-text">Confidence.</span>
+        </h1>
+        <p class="hero-subtitle reveal">Hairstyling · Makeup · Wigs · Fashion · Styling</p>
+        <div class="hero-actions reveal">
+          <button class="btn btn-primary" onclick="showPage('services')">Explore Services</button>
+          <button class="btn btn-ghost" onclick="showPage('shop')">Shop Collection</button>
+        </div>
+      </div>
+      <div class="hero-scroll-hint">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+      <div class="hero-side-text">Beauty · Style · Confidence</div>
+    </div>
+
+    <!-- Brand Strip -->
+    <div class="brand-strip">
+      <div class="strip-track">
+        <span>✦ Hairstyling</span><span>✦ Luxury Wigs</span><span>✦ Glam Makeup</span>
+        <span>✦ Ladies Wear</span><span>✦ Fashion Styling</span><span>✦ Accessories</span>
+        <span>✦ Hairstyling</span><span>✦ Luxury Wigs</span><span>✦ Glam Makeup</span>
+        <span>✦ Ladies Wear</span><span>✦ Fashion Styling</span><span>✦ Accessories</span>
+      </div>
+    </div>
+
+    <!-- Intro Section -->
+    <div class="section intro-section">
+      <div class="container">
+        <div class="intro-grid">
+          <div class="intro-image-wrap">
+            <div class="intro-img-frame">
+              <div class="intro-img-placeholder">
+                <div class="img-art">
+                  <div class="face-silhouette">
+                    <div class="face-glow"></div>
+                    <svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
+                      <defs>
+                        <linearGradient id="faceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" style="stop-color:#C2185B;stop-opacity:0.6"/>
+                          <stop offset="100%" style="stop-color:#D4AF37;stop-opacity:0.4"/>
+                        </linearGradient>
+                      </defs>
+                      <ellipse cx="100" cy="120" rx="60" ry="80" fill="url(#faceGrad)" opacity="0.3"/>
+                      <path d="M100 30 Q140 60 150 120 Q155 170 100 210 Q45 170 50 120 Q60 60 100 30Z" fill="url(#faceGrad)" opacity="0.5"/>
+                      <path d="M70 40 Q100 10 130 40 Q160 20 170 50 Q155 30 130 35 Q100 15 70 35 Q45 30 30 50 Q40 20 70 40Z" fill="#D4AF37" opacity="0.7"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="intro-img-badge">
+                <span class="badge-number">5+</span>
+                <span class="badge-text">Years of Excellence</span>
+              </div>
+            </div>
+            <div class="intro-img-accent"></div>
+          </div>
+          <div class="intro-text">
+            <span class="section-eyebrow">Welcome to</span>
+            <h2 class="section-title">Where Beauty Meets <em>Luxury</em></h2>
+            <p class="section-body">At Layo's Luxe Studio, we believe every woman deserves to look and feel extraordinary. We blend artistry, precision, and premium products to deliver transformations that go far beyond the surface.</p>
+            <p class="section-body">From flawless makeup artistry to custom wig creations and curated fashion pieces — we are your one-stop destination for confidence.</p>
+            <div class="intro-stats">
+              <div class="stat"><span class="stat-num">500+</span><span class="stat-label">Happy Clients</span></div>
+              <div class="stat-divider"></div>
+              <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Premium Quality</span></div>
+              <div class="stat-divider"></div>
+              <div class="stat"><span class="stat-num">6</span><span class="stat-label">Signature Services</span></div>
+            </div>
+            <button class="btn btn-primary" onclick="showPage('about')">Our Story</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Services Preview -->
+    <div class="section services-preview" id="services-preview">
+      <div class="container">
+        <div class="section-header centered">
+          <span class="section-eyebrow">What We Offer</span>
+          <h2 class="section-title">Our <em>Signature</em> Services</h2>
+          <p class="section-subtitle">Premium services crafted for the modern woman who demands nothing but the best.</p>
+        </div>
+        <div class="services-grid">
+          <div class="service-card" onclick="showPage('services')">
+            <div class="service-icon">💇‍♀️</div>
+            <h3>Hairstyling</h3>
+            <p>Expert styling for every occasion — from everyday glam to bridal perfection.</p>
+            <span class="service-link">Learn More →</span>
+          </div>
+          <div class="service-card" onclick="showPage('services')">
+            <div class="service-icon">💄</div>
+            <h3>Makeup</h3>
+            <p>Flawless makeup artistry tailored to your skin tone, style, and event.</p>
+            <span class="service-link">Learn More →</span>
+          </div>
+          <div class="service-card featured" onclick="showPage('services')">
+            <div class="service-badge">Popular</div>
+            <div class="service-icon">👑</div>
+            <h3>Wig Making & Installation</h3>
+            <p>Custom premium wigs made and installed to absolute perfection.</p>
+            <span class="service-link">Learn More →</span>
+          </div>
+          <div class="service-card" onclick="showPage('services')">
+            <div class="service-icon">👗</div>
+            <h3>Ladies Wear</h3>
+            <p>Curated fashion pieces that express elegance, style and confidence.</p>
+            <span class="service-link">Learn More →</span>
+          </div>
+          <div class="service-card" onclick="showPage('services')">
+            <div class="service-icon">✨</div>
+            <h3>Fashion Styling</h3>
+            <p>Complete look curation — let us style you from head to toe.</p>
+            <span class="service-link">Learn More →</span>
+          </div>
+          <div class="service-card" onclick="showPage('services')">
+            <div class="service-icon">💎</div>
+            <h3>Accessories</h3>
+            <p>Premium accessories to complete every look with finishing luxury.</p>
+            <span class="service-link">Learn More →</span>
+          </div>
+        </div>
+        <div class="center-btn">
+          <button class="btn btn-outline" onclick="showPage('services')">View All Services</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured Products -->
+    <div class="section featured-products dark-section">
+      <div class="container">
+        <div class="section-header centered">
+          <span class="section-eyebrow gold">New Arrivals</span>
+          <h2 class="section-title light">Featured <em>Collection</em></h2>
+          <p class="section-subtitle light">Handpicked pieces designed to make you unforgettable.</p>
+        </div>
+        <div class="products-row">
+          <div class="product-card-mini" onclick="openProduct('wig-1')">
+            <div class="product-img wig-img-1">
+              <div class="product-overlay"><span>Quick View</span></div>
+              <div class="product-tag">New</div>
+            </div>
+            <div class="product-info">
+              <span class="product-cat">Wigs</span>
+              <h4>Luxe Lace Front Wig</h4>
+              <span class="product-price">₦45,000</span>
+            </div>
+          </div>
+          <div class="product-card-mini" onclick="openProduct('dress-1')">
+            <div class="product-img dress-img-1">
+              <div class="product-overlay"><span>Quick View</span></div>
+              <div class="product-tag hot">Hot</div>
+            </div>
+            <div class="product-info">
+              <span class="product-cat">Ladies Wear</span>
+              <h4>Elegant Bodycon Dress</h4>
+              <span class="product-price">₦28,000</span>
+            </div>
+          </div>
+          <div class="product-card-mini" onclick="openProduct('acc-1')">
+            <div class="product-img acc-img-1">
+              <div class="product-overlay"><span>Quick View</span></div>
+            </div>
+            <div class="product-info">
+              <span class="product-cat">Accessories</span>
+              <h4>Gold Statement Earrings</h4>
+              <span class="product-price">₦8,500</span>
+            </div>
+          </div>
+          <div class="product-card-mini" onclick="openProduct('wig-2')">
+            <div class="product-img wig-img-2">
+              <div class="product-overlay"><span>Quick View</span></div>
+              <div class="product-tag">Bestseller</div>
+            </div>
+            <div class="product-info">
+              <span class="product-cat">Wigs</span>
+              <h4>Curly Bob Wig</h4>
+              <span class="product-price">₦38,000</span>
+            </div>
+          </div>
+        </div>
+        <div class="center-btn">
+          <button class="btn btn-gold" onclick="showPage('shop')">Shop Full Collection</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="section testimonials-section">
+      <div class="container">
+        <div class="section-header centered">
+          <span class="section-eyebrow">Client Love</span>
+          <h2 class="section-title">What Our <em>Queens</em> Say</h2>
+        </div>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"Layo's transformed my look completely! The wig installation was flawless and the makeup was beyond my expectations. I walked out feeling like royalty."</p>
+            <div class="client-info">
+              <div class="client-avatar">A</div>
+              <div><strong>Adaeze O.</strong><span>Bridal Client</span></div>
+            </div>
+          </div>
+          <div class="testimonial-card featured-testimonial">
+            <div class="quote-mark">"</div>
+            <div class="stars">★★★★★</div>
+            <p>"Best beauty studio I've ever visited. The attention to detail, the premium products, and the warm service — everything is world-class. My go-to forever!"</p>
+            <div class="client-info">
+              <div class="client-avatar">F</div>
+              <div><strong>Fatima B.</strong><span>Regular Client</span></div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>"I bought three outfits and a wig from Layo's Luxe Studio. The quality is unmatched and the styling advice was so helpful. 100% recommended!"</p>
+            <div class="client-info">
+              <div class="client-avatar">C</div>
+              <div><strong>Chisom N.</strong><span>Fashion Client</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Banner -->
+    <div class="cta-banner">
+      <div class="cta-bg-pattern"></div>
+      <div class="container">
+        <div class="cta-content">
+          <h2>Ready for Your <em>Transformation?</em></h2>
+          <p>Book your appointment today and step into the best version of you.</p>
+          <div class="cta-actions">
+            <button class="btn btn-white" onclick="showPage('contact')">Book Appointment</button>
+            <button class="btn btn-outline-white" onclick="showPage('shop')">Shop Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="footer-logo">
+              <span class="footer-crown">♛</span>
+              <div><span class="footer-layo">Layo's</span><span class="footer-luxe">LUXE STUDIO</span></div>
+            </div>
+            <p>Premium beauty and fashion studio for the modern woman who demands excellence.</p>
+            <div class="social-links">
+              <a href="#" class="social-link" aria-label="Instagram">📸</a>
+              <a href="#" class="social-link" aria-label="WhatsApp">💬</a>
+              <a href="#" class="social-link" aria-label="Facebook">👤</a>
+              <a href="#" class="social-link" aria-label="TikTok">🎵</a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#" onclick="showPage('home')">Home</a></li>
+              <li><a href="#" onclick="showPage('about')">About Us</a></li>
+              <li><a href="#" onclick="showPage('services')">Services</a></li>
+              <li><a href="#" onclick="showPage('shop')">Shop</a></li>
+              <li><a href="#" onclick="showPage('gallery')">Gallery</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Our Services</h4>
+            <ul>
+              <li><a href="#">Hairstyling</a></li>
+              <li><a href="#">Makeup Artistry</a></li>
+              <li><a href="#">Wig Making & Installation</a></li>
+              <li><a href="#">Ladies Wear</a></li>
+              <li><a href="#">Fashion Styling</a></li>
+              <li><a href="#">Accessories</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Contact Us</h4>
+            <ul class="contact-list">
+              <li>📞 <a href="tel:+2348000000000">+234 800 000 0000</a></li>
+              <li>📧 <a href="mailto:hello@layosluxe.com">hello@layosluxe.com</a></li>
+              <li>📍 Lagos, Nigeria</li>
+              <li>🕐 Mon–Sat: 9am – 7pm</li>
+            </ul>
+            <button class="btn btn-primary btn-sm" onclick="showPage('contact')">Contact Us</button>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2025 Layo's Luxe Studio. All rights reserved. | <em>Beauty. Style. Confidence.</em></p>
+        </div>
+      </div>
+    </footer>
+
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- PAGE: ABOUT -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="page" id="page-about">
+    <div class="page-hero page-hero-about">
+      <div class="page-hero-overlay"></div>
+      <div class="page-hero-content">
+        <span class="page-eyebrow">Our Story</span>
+        <h1>About <em>Layo's Luxe Studio</em></h1>
+        <p>A passion for beauty. A commitment to excellence.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container">
+        <div class="about-story-grid">
+          <div class="about-img-block">
+            <div class="about-img-main">
+              <div class="about-art">
+                <div class="crown-art">♛</div>
+                <div class="brand-name-art">
+                  <span>Layo's</span>
+                  <span>LUXE</span>
+                  <span>STUDIO</span>
+                </div>
+              </div>
+            </div>
+            <div class="about-img-secondary">
+              <div class="about-stat-box">
+                <span class="big-num">500+</span>
+                <span>Happy Clients</span>
+              </div>
+            </div>
+          </div>
+          <div class="about-story-text">
+            <span class="section-eyebrow">The Beginning</span>
+            <h2 class="section-title">Born from a <em>Love</em> of Beauty</h2>
+            <p>Layo's Luxe Studio was founded on a single, powerful belief — every woman deserves to feel beautiful, confident, and extraordinary. What started as a passion project became a premium destination for women who refuse to settle for ordinary.</p>
+            <p>Our founder, with years of experience in beauty and fashion, built this studio to offer an all-encompassing luxury experience. From the moment you walk in, you're treated like the queen you are.</p>
+            <p>Today, Layo's Luxe Studio stands as a beacon of excellence in beauty and fashion — a place where artistry meets precision, and where every client leaves transformed.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mission & Vision -->
+    <div class="section mv-section">
+      <div class="container">
+        <div class="mv-grid">
+          <div class="mv-card mission">
+            <div class="mv-icon">🎯</div>
+            <h3>Our Mission</h3>
+            <p>To deliver premium beauty and fashion experiences that empower women to look and feel their absolute best — through expert craftsmanship, luxury products, and personalized service.</p>
+          </div>
+          <div class="mv-card vision">
+            <div class="mv-icon">✨</div>
+            <h3>Our Vision</h3>
+            <p>To become Africa's most loved luxury beauty and fashion studio — a brand synonymous with transformation, elegance, and unmatched quality for the modern woman.</p>
+          </div>
+          <div class="mv-card values">
+            <div class="mv-icon">💎</div>
+            <h3>Our Values</h3>
+            <ul>
+              <li>✦ Quality without compromise</li>
+              <li>✦ Elegance in everything</li>
+              <li>✦ Confidence as a result</li>
+              <li>✦ Customer satisfaction first</li>
+              <li>✦ Integrity always</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Why Choose Us -->
+    <div class="section why-section dark-section">
+      <div class="container">
+        <div class="section-header centered">
+          <span class="section-eyebrow gold">Why Us</span>
+          <h2 class="section-title light">Why Choose <em>Layo's Luxe</em></h2>
+        </div>
+        <div class="why-grid">
+          <div class="why-card">
+            <div class="why-num">01</div>
+            <h4>Expert Artistry</h4>
+            <p>Our team are skilled professionals with years of hands-on experience in beauty and fashion.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-num">02</div>
+            <h4>Premium Products</h4>
+            <p>We use only top-tier, skin-friendly products that deliver stunning, long-lasting results.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-num">03</div>
+            <h4>Personalized Service</h4>
+            <p>Every client is unique. We tailor each service to your individual style and preference.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-num">04</div>
+            <h4>Complete Experience</h4>
+            <p>Beauty, wigs, fashion and styling — all under one roof for your ultimate convenience.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Brand Pillars -->
+    <div class="section pillars-section">
+      <div class="container">
+        <div class="section-header centered">
+          <span class="section-eyebrow">Brand Pillars</span>
+          <h2 class="section-title">What We <em>Stand</em> For</h2>
+        </div>
+        <div class="pillars-row">
+          <div class="pillar"><div class="pillar-icon">💇‍♀️</div><h4>Beauty</h4><p>Enhancing your natural beauty with expert skill</p></div>
+          <div class="pillar"><div class="pillar-icon">👑</div><h4>Wigs</h4><p>Premium quality wigs made and installed to perfection</p></div>
+          <div class="pillar"><div class="pillar-icon">💄</div><h4>Makeup</h4><p>Flawless looks for every occasion, tailored to you</p></div>
+          <div class="pillar"><div class="pillar-icon">👗</div><h4>Fashion</h4><p>Trendy ladies wear that expresses your unique style</p></div>
+          <div class="pillar"><div class="pillar-icon">✨</div><h4>Style Xperience</h4><p>Complete transformation — confidence in one place</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-banner">
+      <div class="cta-bg-pattern"></div>
+      <div class="container">
+        <div class="cta-content">
+          <h2>Ready to Experience <em>Luxury?</em></h2>
+          <p>Book your session and let us transform you.</p>
+          <button class="btn btn-white" onclick="showPage('contact')">Book Now</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>© 2025 Layo's Luxe Studio. All rights reserved. | <em>Beauty. Style. Confidence.</em></p></div></div></footer>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- PAGE: SERVICES -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="page" id="page-services">
+    <div class="page-hero page-hero-services">
+      <div class="page-hero-overlay"></div>
+      <div class="page-hero-content">
+        <span class="page-eyebrow">What We Do</span>
+        <h1>Our <em>Premium</em> Services</h1>
+        <p>Every service crafted for the queen in you.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container">
+        <div class="services-detail-grid">
+
+          <div class="service-detail-card">
+            <div class="sdc-header">
+              <div class="sdc-icon">💇‍♀️</div>
+              <div class="sdc-title-wrap">
+                <span class="sdc-cat">Beauty</span>
+                <h3>Hairstyling</h3>
+              </div>
+            </div>
+            <p>Our expert stylists create beautiful, precision-crafted hairstyles for every occasion. Whether you need a sleek everyday style, a voluminous blow-out, or an elaborate bridal updo, we deliver perfection.</p>
+            <ul class="service-includes">
+              <li>✦ Wash & Blow-Dry</li>
+              <li>✦ Silk Presses & Flat Iron</li>
+              <li>✦ Braids & Twists</li>
+              <li>✦ Bridal Hairstyling</li>
+              <li>✦ Hair Treatments</li>
+            </ul>
+            <div class="sdc-footer">
+              <span class="sdc-price">From ₦5,000</span>
+              <button class="btn btn-primary btn-sm" onclick="showPage('contact')">Book Now</button>
+            </div>
+          </div>
+
+          <div class="service-detail-card">
+            <div class="sdc-header">
+              <div class="sdc-icon">💄</div>
+              <div class="sdc-title-wrap">
+                <span class="sdc-cat">Glam</span>
+                <h3>Makeup Artistry</h3>
+              </div>
+            </div>
+            <p>From natural glows to full glamour looks, our makeup artists are skilled in creating flawless, long-lasting finishes tailored to your skin tone, features, and the occasion.</p>
+            <ul class="service-includes">
+              <li>✦ Full Glam Makeup</li>
+              <li>✦ Natural & No-Makeup Look</li>
+              <li>✦ Bridal Makeup</li>
+              <li>✦ Editorial & Event Makeup</li>
+              <li>✦ Contouring & Highlighting</li>
+            </ul>
+            <div class="sdc-footer">
+              <span class="sdc-price">From ₦10,000</span>
+              <button class="btn btn-primary btn-sm" onclick="showPage('contact')">Book Now</button>
+            </div>
+          </div>
+
+          <div class="service-detail-card featured-service">
+            <div class="featured-ribbon">Most Popular</div>
+            <div class="sdc-header">
+              <div class="sdc-icon">👑</div>
+              <div class="sdc-title-wrap">
+                <span class="sdc-cat">Signature</span>
+                <h3>Wig Making & Installation</h3>
+              </div>
+            </div>
+            <p>Our most sought-after service. We custom-make and professionally install premium lace front wigs, closures, and full wigs that look completely natural. Undetectable. Gorgeous. Yours.</p>
+            <ul class="service-includes">
+              <li>✦ Custom Wig Making</li>
+              <li>✦ Lace Front Installation</li>
+              <li>✦ Wig Maintenance & Repair</li>
+              <li>✦ Wig Customization</li>
+              <li>✦ Hair Color & Styling</li>
+            </ul>
+            <div class="sdc-footer">
+              <span class="sdc-price">From ₦20,000</span>
+              <button class="btn btn-primary btn-sm" onclick="showPage('contact')">Book Now</button>
+            </div>
+          </div>
+
+          <div class="service-detail-card">
+            <div class="sdc-header">
+              <div class="sdc-icon">👗</div>
+              <div class="sdc-title-wrap">
+                <span class="sdc-cat">Fashion</span>
+                <h3>Ladies Wear</h3>
+              </div>
+            </div>
+            <p>Our curated collection of ladies wear features elegant, trendy pieces for every body type and occasion. From office chic to evening glamour — we have your wardrobe covered.</p>
+            <ul class="service-includes">
+              <li>✦ Evening Gowns & Dresses</li>
+              <li>✦ Corporate & Office Wear</li>
+              <li>✦ Casual Chic Outfits</li>
+              <li>✦ Traditional Attire</li>
+              <li>✦ Bridal & Event Outfits</li>
+            </ul>
+            <div class="sdc-footer">
+              <span class="sdc-price">From ₦15,000</span>
+              <button class="btn btn-primary btn-sm" onclick="showPage('shop')">Shop Now</button>
+            </div>
+          </div>
+
+          <div class="service-detail-card">
+            <div class="sdc-header">
+              <div class="sdc-icon">✨</div>
+              <div class="sdc-title-wrap">
+                <span class="sdc-cat">Styling</span>
+                <h3>Fashion Styling</h3>
+              </div>
+            </div>
+            <p>Our personal styling service helps you define and refine your style. We curate complete looks from head to toe, ensuring you always step out dressed perfectly for your lifestyle and goals.</p>
+            <ul class="service-includes">
+              <li>✦ Personal Style Consultation</li>
+              <li>✦ Wardrobe Curation</li>
+              <li>✦ Event Outfit Styling</li>
+              <li>✦ Photo Shoot Styling</li>
+              <li>✦ Head-to-Toe Look Creation</li>
+            </ul>
+            <div class="sdc-footer">
+              <span class="sdc-price">From ₦25,000</span>
+              <button class="btn btn-primary btn-sm" onclick="showPage('contact')">Book Now</button>
+            </div>
+          </div>
+
+          <div class="service-detail-card">
+            <div class="sdc-header">
+              <div class="sdc-icon">💎</div>
+              <div class="sdc-title-wrap">
+                <span class="sdc-cat">Luxe</span>
+                <h3>Accessories</h3>
+              </div>
+            </div>
+            <p>Complete your look with our hand-selected premium accessories. From statement jewelry to designer-inspired bags, scarves, and more — the perfect finishing touch for every outfit.</p>
+            <ul class="service-includes">
+              <li>✦ Statement Jewelry</li>
+              <li>✦ Designer-Inspired Bags</li>
+              <li>✦ Scarves & Head Wraps</li>
+              <li>✦ Belts & Hair Accessories</li>
+              <li>✦ Bridal Accessories</li>
+            </ul>
+            <div class="sdc-footer">
+              <span class="sdc-price">From ₦3,500</span>
+              <button class="btn btn-primary btn-sm" onclick="showPage('shop')">Shop Now</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Process Section -->
+    <div class="section process-section dark-section">
+      <div class="container">
+        <div class="section-header centered">
+          <span class="section-eyebrow gold">How It Works</span>
+          <h2 class="section-title light">Your Journey to <em>Glamour</em></h2>
+        </div>
+        <div class="process-steps">
+          <div class="step"><div class="step-num">1</div><h4>Book</h4><p>Contact us or fill out our booking form to reserve your appointment.</p></div>
+          <div class="step-arrow">→</div>
+          <div class="step"><div class="step-num">2</div><h4>Consult</h4><p>We discuss your vision, preferences, and the perfect look for your occasion.</p></div>
+          <div class="step-arrow">→</div>
+          <div class="step"><div class="step-num">3</div><h4>Transform</h4><p>Our experts work their magic to give you the flawless finish you deserve.</p></div>
+          <div class="step-arrow">→</div>
+          <div class="step"><div class="step-num">4</div><h4>Slay</h4><p>Walk out confident, beautiful, and ready to conquer the world. 👑</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-banner">
+      <div class="cta-bg-pattern"></div>
+      <div class="container"><div class="cta-content">
+        <h2>Let's Create Your <em>Perfect Look</em></h2>
+        <p>Book your appointment today.</p>
+        <button class="btn btn-white" onclick="showPage('contact')">Book Appointment</button>
+      </div></div>
+    </div>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>© 2025 Layo's Luxe Studio. All rights reserved. | <em>Beauty. Style. Confidence.</em></p></div></div></footer>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- PAGE: SHOP -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="page" id="page-shop">
+    <div class="page-hero page-hero-shop">
+      <div class="page-hero-overlay"></div>
+      <div class="page-hero-content">
+        <span class="page-eyebrow">The Collection</span>
+        <h1>Shop <em>Luxe</em> Fashion</h1>
+        <p>Premium pieces curated for the modern queen.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container">
+        <!-- Filter Tabs -->
+        <div class="shop-filters">
+          <button class="filter-btn active" onclick="filterProducts('all', this)">All</button>
+          <button class="filter-btn" onclick="filterProducts('wigs', this)">Wigs</button>
+          <button class="filter-btn" onclick="filterProducts('wear', this)">Ladies Wear</button>
+          <button class="filter-btn" onclick="filterProducts('accessories', this)">Accessories</button>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="shop-grid" id="shopGrid">
+
+          <div class="shop-card" data-cat="wigs" onclick="openProduct('wig-1')">
+            <div class="shop-card-img wig-img-1">
+              <div class="shop-card-overlay"><button class="quick-view-btn">Quick View</button></div>
+              <div class="shop-badge">New</div>
+              <button class="wishlist-btn">♡</button>
+            </div>
+            <div class="shop-card-body">
+              <span class="shop-cat">Wigs</span>
+              <h4>Luxe Lace Front Wig — Straight</h4>
+              <div class="shop-price-row">
+                <span class="shop-price">₦45,000</span>
+                <div class="shop-stars">★★★★★</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="shop-card" data-cat="wigs" onclick="openProduct('wig-2')">
+            <div class="shop-card-img wig-img-2">
+              <div class="shop-card-overlay"><button class="quick-view-btn">Quick View</button></div>
+              <div class="shop-badge bestseller">Bestseller</div>
+              <button class="wishlist-btn">♡</button>
+            </div>
+            <div class="shop-card-body">
+              <span class="shop-cat">Wigs</span>
+              <h4>Curly Bob Wig — Honey Blonde</h4>
+              <div class="shop-price-row">
+                <span class="shop-price">₦38,000</span>
+                <div class="shop-stars">★★★★★</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="shop-card" data-cat="wigs" onclick="openProduct('wig-3')">
+            <div class="shop-card-img wig-img-3">
+              <div class="shop-card-overlay"><button class="quick-view-btn">Quick View</button></div>
+              <button class="wishlist-btn">♡</button>
+            </div>
+            <div class="shop-card-body">
+              <span class="shop-cat">Wigs</span>
+              <h4>Deep Wave Full Lace Wig</h4>
+              <div class="shop-price-row">
+                <span class="shop-price">₦52,000</span>
+                <div class="shop-stars">★★★★☆</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="shop-card" data-cat="wear" onclick="openProduct('dress-1')">
+            <div class="shop-card-img dress-img-1">
+              <div class="shop-card-overlay"><button class="quick-view-btn">Quick View</button></div>
+              <div class="shop-badge hot">Hot</div>
+              <button class="wishlist-btn">♡</button>
+            </div>
+            <div class="shop-card-body">
+              <span class="shop-cat">Ladies Wear</span>
+              <h4>Elegant Bodycon Dress — Rose</h4>
+              <div class="shop-price-row">
+                <span class="shop-price">₦28,000</span>
+                <div class="shop-stars">★★★★★</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="shop-card" data-cat="wear" onclick="openProduct('dress-2')">
+            <div class="shop-card-img dress-img-2">
+              <div class="shop-card-overlay"><button class="quick-view-btn">Quick View</button></div>
+              <button class="wishlist-btn">♡</button>
+            </div>
+            <div class="shop-card-body">
+              <span class="shop-cat">Ladies Wear</span>
+              <h4>Floral Midi Dress — Luxe Edition</h4>
+              <div class="shop-price-row">
+                <span class="shop-price">₦22,000</span>
+                <div class="shop-stars">★★★★★</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="shop-card" data-cat="wear" onclick="openProduct('dress-3')">
+            <div class="shop-card-img dress-img-3">
+              <div class="shop-card-overlay"><button class="quick-view-btn">Quick View</button></div>
+              <div class="shop-badge">New</div>
+              <button class="wishlist-btn">♡</button>
+            </div>
+            <div class="shop-card-body">
+              <span class="shop-cat">Ladies Wear</span>
+              <h4>Off-Shoulder Evening Gown</h4>
+              <div class="shop-price-row">
+                <span class="shop-price">₦35,000</span>
+                <div class="shop-stars">★★★★★</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="shop-card" data-cat="accessories" onclick="openProduct('acc-1')">
+            <div class="shop-card-img acc-img-1">
+              <div class="shop-card-overlay"><button class="quick-view-btn">Quick View</button></div>
+              <button class="wishlist-btn">♡</button>
+            </div>
+            <div class="shop-card-body">
+              <span class="shop-cat">Accessories</span>
+              <h4>Gold Statement Earrings</h4>
+              <div class="shop-price-row">
+                <span class="shop-price">₦8,500</span>
+                <div class="shop-stars">★★★★★</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="shop-card" data-cat="accessories" onclick="openProduct('acc-2')">
+            <div class="shop-card-img acc-img-2">
+              <div class="shop-card-overlay"><button class="quick-view-btn">Quick View</button></div>
+              <div class="shop-badge">New</div>
+              <button class="wishlist-btn">♡</button>
+            </div>
+            <div class="shop-card-body">
+              <span class="shop-cat">Accessories</span>
+              <h4>Pearl & Gold Necklace Set</h4>
+              <div class="shop-price-row">
+                <span class="shop-price">₦12,000</span>
+                <div class="shop-stars">★★★★★</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="shop-card" data-cat="accessories" onclick="openProduct('acc-3')">
+            <div class="shop-card-img acc-img-3">
+              <div class="shop-card-overlay"><button class="quick-view-btn">Quick View</button></div>
+              <button class="wishlist-btn">♡</button>
+            </div>
+            <div class="shop-card-body">
+              <span class="shop-cat">Accessories</span>
+              <h4>Luxury Tote Bag — Blush</h4>
+              <div class="shop-price-row">
+                <span class="shop-price">₦18,500</span>
+                <div class="shop-stars">★★★★☆</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-banner">
+      <div class="cta-bg-pattern"></div>
+      <div class="container"><div class="cta-content">
+        <h2>Looking for Something <em>Special?</em></h2>
+        <p>Contact us for custom orders and special requests.</p>
+        <button class="btn btn-white" onclick="showPage('contact')">Contact Us</button>
+      </div></div>
+    </div>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>© 2025 Layo's Luxe Studio. All rights reserved. | <em>Beauty. Style. Confidence.</em></p></div></div></footer>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- PAGE: GALLERY -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="page" id="page-gallery">
+    <div class="page-hero page-hero-gallery">
+      <div class="page-hero-overlay"></div>
+      <div class="page-hero-content">
+        <span class="page-eyebrow">Our Work</span>
+        <h1>The <em>Gallery</em></h1>
+        <p>A showcase of transformations, style, and artistry.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container">
+        <div class="gallery-filters">
+          <button class="filter-btn active" onclick="filterGallery('all', this)">All</button>
+          <button class="filter-btn" onclick="filterGallery('makeup', this)">Makeup</button>
+          <button class="filter-btn" onclick="filterGallery('wigs', this)">Wigs</button>
+          <button class="filter-btn" onclick="filterGallery('fashion', this)">Fashion</button>
+          <button class="filter-btn" onclick="filterGallery('styling', this)">Styling</button>
+        </div>
+
+        <div class="masonry-grid" id="galleryGrid">
+          <div class="masonry-item tall" data-cat="makeup"><div class="masonry-img makeup-1"><div class="masonry-overlay"><span>Bridal Glam</span></div></div></div>
+          <div class="masonry-item" data-cat="wigs"><div class="masonry-img wig-g-1"><div class="masonry-overlay"><span>Lace Front Install</span></div></div></div>
+          <div class="masonry-item" data-cat="fashion"><div class="masonry-img fashion-g-1"><div class="masonry-overlay"><span>Evening Glam</span></div></div></div>
+          <div class="masonry-item tall" data-cat="styling"><div class="masonry-img styling-g-1"><div class="masonry-overlay"><span>Full Look</span></div></div></div>
+          <div class="masonry-item wide" data-cat="makeup"><div class="masonry-img makeup-2"><div class="masonry-overlay"><span>Editorial Makeup</span></div></div></div>
+          <div class="masonry-item" data-cat="wigs"><div class="masonry-img wig-g-2"><div class="masonry-overlay"><span>Curly Wig</span></div></div></div>
+          <div class="masonry-item" data-cat="fashion"><div class="masonry-img fashion-g-2"><div class="masonry-overlay"><span>Bodycon Look</span></div></div></div>
+          <div class="masonry-item" data-cat="makeup"><div class="masonry-img makeup-3"><div class="masonry-overlay"><span>Natural Glam</span></div></div></div>
+          <div class="masonry-item tall" data-cat="wigs"><div class="masonry-img wig-g-3"><div class="masonry-overlay"><span>Straight Lace Wig</span></div></div></div>
+          <div class="masonry-item" data-cat="styling"><div class="masonry-img styling-g-2"><div class="masonry-overlay"><span>Head-to-Toe Style</span></div></div></div>
+          <div class="masonry-item wide" data-cat="fashion"><div class="masonry-img fashion-g-3"><div class="masonry-overlay"><span>Fashion Shoot</span></div></div></div>
+          <div class="masonry-item" data-cat="makeup"><div class="masonry-img makeup-4"><div class="masonry-overlay"><span>Event Makeup</span></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-banner">
+      <div class="cta-bg-pattern"></div>
+      <div class="container"><div class="cta-content">
+        <h2>Want a Look Like <em>These?</em></h2>
+        <p>Book your appointment and let's create your story.</p>
+        <button class="btn btn-white" onclick="showPage('contact')">Book Now</button>
+      </div></div>
+    </div>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>© 2025 Layo's Luxe Studio. All rights reserved. | <em>Beauty. Style. Confidence.</em></p></div></div></footer>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- PAGE: CONTACT -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="page" id="page-contact">
+    <div class="page-hero page-hero-contact">
+      <div class="page-hero-overlay"></div>
+      <div class="page-hero-content">
+        <span class="page-eyebrow">Get in Touch</span>
+        <h1>Book Your <em>Appointment</em></h1>
+        <p>We'd love to hear from you and create your perfect look.</p>
+      </div>
+    </div>
+
+    <div class="section contact-section">
+      <div class="container">
+        <div class="contact-grid">
+
+          <div class="contact-info-col">
+            <span class="section-eyebrow">Contact Information</span>
+            <h2 class="section-title">Let's <em>Connect</em></h2>
+            <p>Ready to book a service, order a product, or simply ask a question? Reach out through any of our channels or fill in the form and we'll get back to you promptly.</p>
+
+            <div class="contact-items">
+              <div class="contact-item">
+                <div class="contact-icon">📞</div>
+                <div>
+                  <h4>Phone / WhatsApp</h4>
+                  <a href="tel:+2348000000000">+234 800 000 0000</a>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon">📧</div>
+                <div>
+                  <h4>Email</h4>
+                  <a href="mailto:hello@layosluxe.com">hello@layosluxe.com</a>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon">🌐</div>
+                <div>
+                  <h4>Website</h4>
+                  <a href="#">www.layosluxestudio.com</a>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon">📍</div>
+                <div>
+                  <h4>Location</h4>
+                  <span>Lagos, Nigeria</span>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon">🕐</div>
+                <div>
+                  <h4>Working Hours</h4>
+                  <span>Monday – Saturday: 9:00am – 7:00pm</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-social">
+              <h4>Follow Us</h4>
+              <div class="social-links">
+                <a href="#" class="social-link large">📸 Instagram</a>
+                <a href="#" class="social-link large">💬 WhatsApp</a>
+                <a href="#" class="social-link large">🎵 TikTok</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-form-col">
+            <div class="form-card">
+              <div class="form-header">
+                <h3>Send Us a Message</h3>
+                <p>Fill in your details and we'll respond within 24 hours.</p>
+              </div>
+
+              <div id="formSuccess" class="form-success hidden">
+                <div class="success-icon">✓</div>
+                <h3>Message Sent!</h3>
+                <p>Thank you! We'll get back to you within 24 hours. 👑</p>
+              </div>
+
+              <form id="contactForm" class="contact-form" onsubmit="submitForm(event)">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="firstName">First Name *</label>
+                    <input type="text" id="firstName" name="firstName" placeholder="Your first name" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="lastName">Last Name *</label>
+                    <input type="text" id="lastName" name="lastName" placeholder="Your last name" required />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="email">Email Address *</label>
+                  <input type="email" id="email" name="email" placeholder="your@email.com" required />
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone Number</label>
+                  <input type="tel" id="phone" name="phone" placeholder="+234 000 000 0000" />
+                </div>
+                <div class="form-group">
+                  <label for="service">Service Interested In</label>
+                  <select id="service" name="service">
+                    <option value="">Select a service...</option>
+                    <option>Hairstyling</option>
+                    <option>Makeup Artistry</option>
+                    <option>Wig Making & Installation</option>
+                    <option>Ladies Wear / Shopping</option>
+                    <option>Fashion Styling</option>
+                    <option>Accessories</option>
+                    <option>Multiple Services</option>
+                    <option>General Enquiry</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="message">Your Message *</label>
+                  <textarea id="message" name="message" placeholder="Tell us about your needs, preferred date, or any questions..." rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
+                  <span class="btn-text">Send Message</span>
+                  <span class="btn-loader hidden">Sending...</span>
+                </button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="footer-logo">
+              <span class="footer-crown">♛</span>
+              <div><span class="footer-layo">Layo's</span><span class="footer-luxe">LUXE STUDIO</span></div>
+            </div>
+            <p>Premium beauty and fashion studio for the modern woman.</p>
+            <div class="social-links">
+              <a href="#" class="social-link">📸</a>
+              <a href="#" class="social-link">💬</a>
+              <a href="#" class="social-link">👤</a>
+              <a href="#" class="social-link">🎵</a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#" onclick="showPage('home')">Home</a></li>
+              <li><a href="#" onclick="showPage('about')">About</a></li>
+              <li><a href="#" onclick="showPage('services')">Services</a></li>
+              <li><a href="#" onclick="showPage('shop')">Shop</a></li>
+              <li><a href="#" onclick="showPage('gallery')">Gallery</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Contact</h4>
+            <ul class="contact-list">
+              <li>📞 +234 800 000 0000</li>
+              <li>📧 hello@layosluxe.com</li>
+              <li>📍 Lagos, Nigeria</li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2025 Layo's Luxe Studio. All rights reserved. | <em>Beauty. Style. Confidence.</em></p>
+        </div>
+      </div>
+    </footer>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- PRODUCT MODAL -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+    <div class="product-modal" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-inner" id="modalInner">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
